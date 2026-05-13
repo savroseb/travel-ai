@@ -8,9 +8,13 @@ import { TripCard } from "./TripCard";
 
 type TripSelectionPanelProps = {
   initialTrips: Trip[];
+  initialDestination?: string;
 };
 
-export function TripSelectionPanel({ initialTrips }: TripSelectionPanelProps) {
+export function TripSelectionPanel({
+  initialTrips,
+  initialDestination = "",
+}: TripSelectionPanelProps) {
   const [dashboardTrips, setDashboardTrips] = useState(initialTrips);
   const [selectedTripId, setSelectedTripId] = useState(initialTrips[0]?.id ?? "");
   const selectedTrip = dashboardTrips.find((trip) => trip.id === selectedTripId);
@@ -29,7 +33,7 @@ export function TripSelectionPanel({ initialTrips }: TripSelectionPanelProps) {
 
   return (
     <div>
-      <div className="mb-5 grid overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm sm:grid-cols-3">
+      <div className="mb-5 grid overflow-hidden rounded-lg border border-emerald-100 bg-white shadow-sm sm:grid-cols-3">
         <div className="border-b border-slate-100 p-4 sm:border-b-0 sm:border-r">
           <p className="text-3xl font-semibold">
             {dashboardTrips.length}
@@ -61,7 +65,11 @@ export function TripSelectionPanel({ initialTrips }: TripSelectionPanelProps) {
         </div>
       </div>
 
-      <CreateTripForm onCreateTrip={handleCreateTrip} />
+      <CreateTripForm
+        key={initialDestination}
+        initialDestination={initialDestination}
+        onCreateTrip={handleCreateTrip}
+      />
 
       {hasTrips ? (
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px] xl:items-start">
@@ -80,7 +88,7 @@ export function TripSelectionPanel({ initialTrips }: TripSelectionPanelProps) {
             {selectedTrip ? (
               <div>
                 <div className="mb-5 border-b border-slate-100 pb-5">
-                  <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-teal-700">
+                  <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-emerald-700">
                     Selected trip
                   </p>
 
@@ -136,12 +144,12 @@ export function TripSelectionPanel({ initialTrips }: TripSelectionPanelProps) {
                       Top recommendation
                     </h4>
 
-                    <div className="mt-3 rounded-md bg-teal-50 p-3 text-sm text-teal-950">
+                    <div className="mt-3 rounded-md bg-emerald-50 p-3 text-sm text-emerald-950">
                       <p className="font-semibold">
                         {selectedTrip.recommendations[0]?.title}
                       </p>
 
-                      <p className="mt-1 leading-5 text-teal-800">
+                      <p className="mt-1 leading-5 text-emerald-800">
                         {selectedTrip.recommendations[0]?.reason}
                       </p>
                     </div>

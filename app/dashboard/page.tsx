@@ -2,11 +2,20 @@ import Link from "next/link";
 import { TripSelectionPanel } from "./_components/TripSelectionPanel";
 import { trips } from "../lib/trips";
 
-export default function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ destination?: string | string[] }>;
+}) {
+  const params = await searchParams;
+  const initialDestination = Array.isArray(params.destination)
+    ? params.destination[0] ?? ""
+    : params.destination ?? "";
+
   return (
-    <main className="min-h-screen bg-[#f7f5f0] px-4 py-6 text-slate-950 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#f6fbf8] px-4 py-6 text-slate-950 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <nav className="mb-8 flex items-center justify-between rounded-lg border border-slate-200/80 bg-white/80 px-4 py-3 shadow-sm backdrop-blur">
+        <nav className="mb-8 flex items-center justify-between rounded-lg border border-emerald-100/80 bg-white/85 px-4 py-3 shadow-sm backdrop-blur">
           <Link
             href="/"
             className="text-sm font-semibold tracking-wide text-slate-950"
@@ -16,7 +25,7 @@ export default function DashboardPage() {
 
           <Link
             href="/"
-            className="rounded-md border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2"
+            className="rounded-md border border-emerald-100 px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-emerald-200 hover:bg-emerald-50 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:ring-offset-2"
           >
             Back Home
           </Link>
@@ -24,7 +33,7 @@ export default function DashboardPage() {
 
         <header className="mb-8">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-teal-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-emerald-700">
               Your travel workspace
             </p>
 
@@ -58,7 +67,10 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          <TripSelectionPanel initialTrips={trips} />
+          <TripSelectionPanel
+            initialTrips={trips}
+            initialDestination={initialDestination}
+          />
         </section>
       </div>
     </main>

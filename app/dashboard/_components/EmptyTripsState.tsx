@@ -1,7 +1,7 @@
 export function EmptyTripsState() {
   return (
-    <div className="rounded-lg border border-dashed border-slate-300 bg-white/70 px-6 py-12 text-center shadow-sm">
-      <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-teal-50 text-xl font-semibold text-teal-700">
+    <div className="rounded-lg border border-dashed border-emerald-200 bg-white/75 px-6 py-12 text-center shadow-sm">
+      <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-xl font-semibold text-emerald-700">
         +
       </div>
 

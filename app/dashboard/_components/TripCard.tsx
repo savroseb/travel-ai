@@ -17,18 +17,18 @@ export function TripCard({ trip, isSelected, onSelect }: TripCardProps) {
     <article
       className={`group relative flex min-h-80 flex-col overflow-hidden rounded-lg border p-5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md ${
         isSelected
-          ? "border-teal-500 bg-teal-50/60 ring-2 ring-teal-200"
+          ? "border-emerald-500 bg-emerald-50/70 ring-2 ring-emerald-200"
           : "border-slate-200 bg-white"
       }`}
     >
       {isSelected ? (
-        <div className="absolute inset-y-0 left-0 w-1.5 bg-teal-600" />
+        <div className="absolute inset-y-0 left-0 w-1.5 bg-emerald-600" />
       ) : null}
 
       <div className="mb-5 flex items-start justify-between gap-3">
         <div className="min-w-0">
           {isSelected ? (
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-teal-700">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-emerald-700">
               Currently selected
             </p>
           ) : null}
@@ -79,8 +79,8 @@ export function TripCard({ trip, isSelected, onSelect }: TripCardProps) {
           aria-pressed={isSelected}
           className={`shrink-0 rounded-md px-4 py-2 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 ${
             isSelected
-              ? "bg-teal-700 text-white hover:bg-teal-800"
-              : "bg-slate-950 text-white hover:bg-teal-700"
+              ? "bg-emerald-800 text-white hover:bg-emerald-900"
+              : "bg-slate-950 text-white hover:bg-emerald-800"
           }`}
         >
           {isSelected ? "Selected" : "View"}

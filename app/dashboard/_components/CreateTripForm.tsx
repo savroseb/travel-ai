@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Trip } from "../../lib/trips";
 
 type CreateTripFormProps = {
+  initialDestination?: string;
   onCreateTrip: (trip: Trip) => void;
 };
 
@@ -14,19 +15,26 @@ type FormErrors = {
   travelStyle?: string;
 };
 
-const initialForm = {
-  destination: "",
-  duration: "5 days",
-  budget: "Moderate" as Budget,
-  travelStyle: "",
-};
+function createInitialForm(destination = "") {
+  return {
+    destination,
+    duration: "5 days",
+    budget: "Moderate" as Budget,
+    travelStyle: "",
+  };
+}
+
+const initialForm = createInitialForm();
 
 function createTripId(destination: string) {
   return `${destination.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}-${Date.now()}`;
 }
 
-export function CreateTripForm({ onCreateTrip }: CreateTripFormProps) {
-  const [formData, setFormData] = useState(initialForm);
+export function CreateTripForm({
+  initialDestination = "",
+  onCreateTrip,
+}: CreateTripFormProps) {
+  const [formData, setFormData] = useState(() => createInitialForm(initialDestination));
   const [errors, setErrors] = useState<FormErrors>({});
 
   function validateForm() {
@@ -106,12 +114,13 @@ export function CreateTripForm({ onCreateTrip }: CreateTripFormProps) {
 
   return (
     <form
+      id="generate-trip"
       onSubmit={handleSubmit}
       noValidate
-      className="mb-5 rounded-lg border border-slate-200 bg-white p-5 shadow-sm"
+      className="mb-5 rounded-lg border border-emerald-100 bg-white p-5 shadow-sm"
     >
       <div className="mb-5">
-        <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">
+        <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">
           Create
         </p>
 
@@ -149,7 +158,7 @@ export function CreateTripForm({ onCreateTrip }: CreateTripFormProps) {
             className={`mt-2 w-full rounded-md border bg-white px-3 py-2 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:ring-2 ${
               errors.destination
                 ? "border-red-300 focus:border-red-500 focus:ring-red-100"
-                : "border-slate-200 focus:border-teal-600 focus:ring-teal-100"
+                : "border-slate-200 focus:border-emerald-600 focus:ring-emerald-100"
             }`}
             required
           />
@@ -177,7 +186,7 @@ export function CreateTripForm({ onCreateTrip }: CreateTripFormProps) {
                 duration: event.target.value,
               }))
             }
-            className="mt-2 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-950 outline-none transition focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
+            className="mt-2 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-950 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
           >
             <option>3 days</option>
             <option>5 days</option>
@@ -199,7 +208,7 @@ export function CreateTripForm({ onCreateTrip }: CreateTripFormProps) {
                 budget: event.target.value as Budget,
               }))
             }
-            className="mt-2 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-950 outline-none transition focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
+            className="mt-2 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-950 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
           >
             <option>Budget</option>
             <option>Moderate</option>
@@ -235,7 +244,7 @@ export function CreateTripForm({ onCreateTrip }: CreateTripFormProps) {
             className={`mt-2 w-full rounded-md border bg-white px-3 py-2 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:ring-2 ${
               errors.travelStyle
                 ? "border-red-300 focus:border-red-500 focus:ring-red-100"
-                : "border-slate-200 focus:border-teal-600 focus:ring-teal-100"
+                : "border-slate-200 focus:border-emerald-600 focus:ring-emerald-100"
             }`}
             required
           />
@@ -253,7 +262,7 @@ export function CreateTripForm({ onCreateTrip }: CreateTripFormProps) {
 
       <button
         type="submit"
-        className="mt-5 rounded-md bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2"
+        className="mt-5 rounded-md bg-emerald-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:ring-offset-2"
       >
         Generate trip
       </button>
